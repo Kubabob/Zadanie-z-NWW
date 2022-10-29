@@ -1,0 +1,105 @@
+
+def z():
+    liczba1
+    liczba2
+    NWW
+    NWD
+
+
+def lst():
+    dzielniki_liczby1
+    dzielniki_liczby2
+    wspolne_dzielniki
+
+
+def reset():
+    z.liczba1 = 0
+    z.liczba2 = 0
+    z.NWW = 0
+    z.NWD = 0
+
+    lst.dzielniki_liczby1 = []
+    lst.dzielniki_liczby2 = []
+    lst.wspolne_dzielniki = []
+
+
+def wait():
+    input('Nacisnij dowolny przycisk aby kontynuowac')
+
+
+def check():
+    print('1: ' + str(z.liczba1))
+    print('2: ' + str(z.liczba2))
+    print('NWW: ' + str(z.NWW))
+    print('NWD: ' + str(z.NWD))
+    print('Dzielniki 1szej liczby: ' + str(lst.dzielniki_liczby1))
+    print('Dzielniki 2giej liczby: ' + str(lst.dzielniki_liczby2))
+    print('Wspolne dzielniki: ' + str(lst.wspolne_dzielniki))
+
+
+def inputLiczb():
+    print('Podaj 1sza liczbe')
+    z.liczba1 = int(input())
+    print('Podaj 2ga liczbe')
+    z.liczba2 = int(input())
+
+
+def nwdF():
+    for i in range(1, z.liczba1 + 1):
+        if z.liczba1 % i == 0:
+            lst.dzielniki_liczby1.append(i)
+
+    for i in range(1, z.liczba2 + 1):
+        if z.liczba2 % i == 0:
+            lst.dzielniki_liczby2.append(i)
+
+    for i in range(len(lst.dzielniki_liczby1)):
+        for j in range(len(lst.dzielniki_liczby2)):
+            if lst.dzielniki_liczby1[i] == lst.dzielniki_liczby2[j]:
+                lst.wspolne_dzielniki.append(lst.dzielniki_liczby2[j])
+
+    z.NWD = max(lst.wspolne_dzielniki)
+
+
+while True:
+    print("""
+Menu:
+[1] NWW dwóch liczb
+[2] NWD dwóch liczb
+[3] Zakończ działanie programu
+    """)
+    menu_switch = input()
+    reset()
+
+    if menu_switch == '1':
+
+        inputLiczb()
+
+        if z.liczba1 == z.liczba2:
+            z.NWW = z.liczba1
+            print('Podałeś tą samą liczbę dwa razy, czyli NWW to: ' + str(z.NWW))
+            wait()
+        elif z.liczba1 % z.liczba2 == 0:
+            z.NWW = z.liczba1
+            print('NWW to: ' + str(z.NWW))
+            wait()
+        elif z.liczba2 % z.liczba1 == 0:
+            z.NWW = z.liczba2
+            print('NWW to: ' + str(z.NWW))
+            wait()
+        else:
+            nwdF()
+            z.NWW = ((z.liczba1 * z.liczba2) / z.NWD)
+            print('NWW to: ' + str(int(z.NWW)))
+            wait()
+            #check()
+
+    elif menu_switch == '2':
+        inputLiczb()
+        nwdF()
+        print('NWD liczb ' + str(z.NWD))
+        wait()
+        #check()
+
+    else:
+        break
